@@ -1,0 +1,170 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+  <display-name>Archetype Created Web Application</display-name>
+
+  xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+  version="4.0">
+
+  <welcome-file-list>
+    <welcome-file>/login-jsp</welcome-file>
+  </welcome-file-list>
+
+  <filter>
+    <filter-name>AdminFilter</filter-name>
+    <filter-class>org.application.controller.filters.AdminFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>AdminFilter</filter-name>
+    <url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+
+  <filter>
+    <filter-name>UserFilter</filter-name>
+    <filter-class>org.application.controller.filters.UserFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>UserFilter</filter-name>
+    <url-pattern>/user/*</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>UserMainMenuJsp</servlet-name>
+    <jsp-file>/jsp/user/mainUserMenu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserMainMenuJsp</servlet-name>
+    <url-pattern>/user/main-menu</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AdminMainMenuJsp</servlet-name>
+    <jsp-file>/jsp/admin/mainAdminMenu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminMainMenuJsp</servlet-name>
+    <url-pattern>/admin/main-menu</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>LoginJsp</servlet-name>
+    <jsp-file>/jsp/login.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginJsp</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EditTariffs</servlet-name>
+    <jsp-file>/jsp/admin/EditTariffsMenu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditTariffs</servlet-name>
+    <url-pattern>/admin/edit-tariffs</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EditUsers</servlet-name>
+    <jsp-file>/jsp/admin/EditUsersMenu.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditUsers</servlet-name>
+    <url-pattern>/admin/edit-users</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AddTariff</servlet-name>
+    <jsp-file>/jsp/admin/AddTariff.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTariff</servlet-name>
+    <url-pattern>/admin/edit-tariffs/add-tariff</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteTariff</servlet-name>
+    <jsp-file>/jsp/admin/DeleteTariff.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTariff</servlet-name>
+    <url-pattern>/admin/edit-tariffs/delete-tariff</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>EditTariff</servlet-name>
+    <jsp-file>/jsp/admin/EditTariff.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditTariff</servlet-name>
+    <url-pattern>/admin/edit-tariffs/edit-tariff</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ShowTariffs</servlet-name>
+    <jsp-file>/jsp/ShowTariffs.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowTariffs</servlet-name>
+    <url-pattern>/show-tariffs</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>RegisterUser</servlet-name>
+    <jsp-file>/jsp/admin/RegisterUser.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterUser</servlet-name>
+    <url-pattern>/admin/edit-users/register-user</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ChangeUserStatus</servlet-name>
+    <jsp-file>/jsp/admin/ChangeUserStatus.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChangeUserStatus</servlet-name>
+    <url-pattern>/admin/edit-users/change-status</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ShowUsers</servlet-name>
+    <jsp-file>/jsp/admin/ShowUsers.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowUsers</servlet-name>
+    <url-pattern>/admin/edit-users/show-users</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ChooseTariff</servlet-name>
+    <jsp-file>/jsp/user/ChooseTariff.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ChooseTariff</servlet-name>
+    <url-pattern>/user/choose-tariff</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>TopUpAccount</servlet-name>
+    <jsp-file>/jsp/user/TopUpAccount.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TopUpAccount</servlet-name>
+    <url-pattern>/user/top-up</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>ShowProfile</servlet-name>
+    <jsp-file>/jsp/user/ShowProfile.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowProfile</servlet-name>
+    <url-pattern>/user/show-profile</url-pattern>
+  </servlet-mapping>
+
+</web-app>
