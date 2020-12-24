@@ -35,7 +35,7 @@ public class DepositAccountDao extends JdbcDao<DepositAccount, Long> {
     }
 
     @Override
-    public DepositAccount getByID(Long id){
+    public DepositAccount getByID(Long id) {
         PreparedStatement getByIdSt = null;
         try {
             getByIdSt = connection.prepareStatement("select balance " +

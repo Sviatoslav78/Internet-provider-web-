@@ -17,14 +17,14 @@
     <form action="/?command=register" method="post">
 
         <p>Subscriber's name: <input name="subscriberName" type="text"/></p>
-        <p><input type="submit" value="Register user" /></p>
+        <p><input type="submit" value="Register user"/></p>
 
         <input type="button" value="Back" onClick='location.href="/admin/edit-users"'>
 
-        <p> <c:out value="${registerUserResponse}" /> </p>
+        <p><c:out value="${registerUserResponse}"/></p>
     </form>
 </h3>
-<p> <c:out value="${newSubscriber.getLogin()}" /> </p>
-<p> <c:out value="${newSubscriber.getPassword()}" /> </p>
+<p><c:out value="${newSubscriber.getLogin()}"/></p>
+<p><c:out value="${newSubscriber.getPassword()}"/></p>
 </body>
 </html>

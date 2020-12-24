@@ -1,7 +1,7 @@
 package org.application.controller.commands;
 
+import org.apache.log4j.Logger;
 import org.application.controller.Command;
-import org.application.controller.ManagerCommands;
 import org.application.controller.Validator;
 import org.application.model.entity.ServiceType;
 import org.application.model.entity.Tariff;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AddTariffCommand extends Command {
     private TariffService tariffService;
+    private static final Logger logger = Logger.getLogger(AddTariffCommand.class);
 
     public AddTariffCommand() {
         tariffService = new TariffService();
@@ -20,24 +21,23 @@ public class AddTariffCommand extends Command {
     public String execute(HttpServletRequest request) {
         int serviceType = Integer.parseInt(request.getParameter("serviceType"));
         String tariffName = request.getParameter("tariffName");
-        int tariffPrice = 0;
+        int tariffPrice;
 
-        try {
+        if (Validator.isValidTariffName(tariffName) && Validator.isValidSum(request.getParameter("tariffPrice"))) {
             tariffPrice = Integer.parseInt(request.getParameter("tariffPrice"));
-        } catch (NumberFormatException e) {
-            request.setAttribute("addTariffResponse", "Invalid price");
 
-            return "forward$/admin/edit-tariffs/add-tariff";
-        }
-
-        if (Validator.isValidTariffName(tariffName) && tariffPrice > 0) {
             if (tariffService.addTariff(new Tariff(ServiceType.values()[serviceType], tariffName, tariffPrice))) {
+                logger.info("admin added tariff '" + tariffName + "', sess_id=" + request.getRequestedSessionId());
                 request.setAttribute("addTariffResponse", "Tariff was added successfully");
             } else {
+                logger.warn("admin tried to add tariff '" + tariffName + "', it already exists, " +
+                        "sess_id=" + request.getRequestedSessionId());
                 request.setAttribute("addTariffResponse", "Tariff already exists");
             }
         } else {
-            request.setAttribute("addTariffResponse", "Invalid tariff name or price is negative");
+            logger.error("admin tried to add tariff '" + tariffName + "' with price '" + request.getParameter("tariffPrice")
+                    + "', invalid tariff name or price, " + "sess_id=" + request.getRequestedSessionId());
+            request.setAttribute("addTariffResponse", "Invalid tariff name or price");
         }
         return "forward$/admin/edit-tariffs/add-tariff";
     }

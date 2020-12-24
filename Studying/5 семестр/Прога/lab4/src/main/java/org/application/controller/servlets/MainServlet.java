@@ -1,5 +1,6 @@
 package org.application.controller.servlets;
 
+import org.apache.log4j.Logger;
 import org.application.controller.ManagerCommands;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/")
-public class GeneralServlet extends HttpServlet {
+public class MainServlet extends HttpServlet {
     ManagerCommands managerCommands = new ManagerCommands();
+    private static Logger logger = null;
+
+    @Override
+    public void init() {
+        logger = Logger.getLogger(MainServlet.class);
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
@@ -23,6 +30,8 @@ public class GeneralServlet extends HttpServlet {
         if (command == null) {
             checkSession(request, response);
         } else {
+            logger.info("client(" + request.getSession().getAttribute("currentUser") + ") sent " + command + "-command, " +
+                    "sess_id=" + request.getRequestedSessionId());
             String commandResponse = managerCommands.getCommand(command).execute(request);
 
             if (commandResponse.split("\\$")[0].equals("forward")) {

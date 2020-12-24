@@ -1,5 +1,6 @@
 package org.application.controller.commands;
 
+import org.apache.log4j.Logger;
 import org.application.controller.Command;
 import org.application.controller.Validator;
 import org.application.model.entity.Subscriber;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class RegisterUserCommand extends Command {
     private RegisterService registerService;
+    private static final Logger logger = Logger.getLogger(RegisterUserCommand.class);
 
     public RegisterUserCommand() {
         registerService = new RegisterService();
@@ -19,10 +21,14 @@ public class RegisterUserCommand extends Command {
         String newSubscriberName = request.getParameter("subscriberName");
 
         if (Validator.isValidSubscriberName(newSubscriberName)) {
+            logger.info("admin registered new user with name '" + newSubscriberName + "', " +
+                    "sess_id=" + request.getRequestedSessionId());
             Subscriber newSubscriber = registerService.registerUser(newSubscriberName);
             request.setAttribute("registerUserResponse", "User was successfully registered, login details:");
             request.setAttribute("newSubscriber", newSubscriber);
         } else {
+            logger.error("admin tried to register new user, but its name '" + newSubscriberName + "' is invalid, " +
+                    "sess_id=" + request.getRequestedSessionId());
             request.setAttribute("registerUserResponse", "Invalid subscriber name");
         }
 

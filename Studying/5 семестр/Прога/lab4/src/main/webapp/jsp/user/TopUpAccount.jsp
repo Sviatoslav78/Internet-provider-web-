@@ -16,11 +16,11 @@
 <h3>
     <form action="/?command=deposit" method="post">
 
-        <p>Deposit sum: <input name="depositSum" type="number" /></p>
-        <p><input type="submit" value="Top up account" /></p>
+        <p>Deposit sum: <input name="depositSum" type="number"/></p>
+        <p><input type="submit" value="Top up account"/></p>
         <input type="button" value="Back" onClick='location.href="/user/main-menu"'>
 
-        <p> <c:out value="${depositCommandResponse}" /> </p>
+        <p><c:out value="${depositCommandResponse}"/></p>
     </form>
 </h3>
 </body>

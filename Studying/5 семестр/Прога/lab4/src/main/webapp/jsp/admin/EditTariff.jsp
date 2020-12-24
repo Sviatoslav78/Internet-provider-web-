@@ -16,8 +16,15 @@
 <h3>
     <form action="/?command=editTariff" method="post">
 
-        <p>Tariff name: <input name="tariffName" type="text"/></p>
-        <p>Tariff price: <input name="tariffPrice" type="number" /></p>
+        <p>Tariffs to delete:
+            <select name="tariffName">
+                <c:forEach var="tariff" items="${currentTariffs}">
+                    <option value="${tariff.getName()}">${tariff.getName()}(${tariff.getServiceType()}),
+                        price:${tariff.getPrice()}</option>
+                </c:forEach>
+            </select>
+        </p>
+        <p>Tariff price: <input name="tariffPrice" type="number"/></p>
         <p><input type="submit" value="Edit tariff"/></p>
 
         <input type="button" value="Back" onClick='location.href="/admin/edit-tariffs"'>

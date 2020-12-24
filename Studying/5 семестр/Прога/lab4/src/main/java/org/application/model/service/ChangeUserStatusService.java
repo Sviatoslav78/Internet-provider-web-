@@ -4,8 +4,6 @@ import org.application.model.db.SubscriberDao;
 import org.application.model.db.connection.ConnectionImpl;
 import org.application.model.entity.Subscriber;
 
-import java.sql.SQLException;
-
 public class ChangeUserStatusService {
     SubscriberDao subscriberDao;
 
@@ -15,7 +13,7 @@ public class ChangeUserStatusService {
 
     public boolean changeUserStatus(String userLogin, boolean action) {
         if (!subscriberDao.getByLogin(userLogin).getLogin().equals("EMPTY")) {
-            subscriberDao.update(new Subscriber(action, userLogin));
+            subscriberDao.update(new Subscriber(action, 0.0, userLogin));
             return true;
         }
         return false;

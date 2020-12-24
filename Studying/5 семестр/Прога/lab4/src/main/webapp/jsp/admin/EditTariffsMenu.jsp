@@ -16,8 +16,8 @@
 <h3>
     <ol>
         <li><a href="<c:url value='/admin/edit-tariffs/add-tariff' />">Add tariff</a></li>
-        <li><a href="<c:url value='/admin/edit-tariffs/delete-tariff' />">Delete tariff</a></li>
-        <li><a href="<c:url value='/admin/edit-tariffs/edit-tariff' />">Edit tariff</a></li>
+        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/admin/edit-tariffs/delete-tariff' />">Delete tariff</a></li>
+        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/admin/edit-tariffs/edit-tariff' />">Edit tariff</a></li>
         <li><a href="<c:url value='/show-tariffs' />">Show all tariffs</a></li>
     </ol>
 </h3>

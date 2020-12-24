@@ -1,5 +1,6 @@
 package org.application.controller.commands;
 
+import org.apache.log4j.Logger;
 import org.application.controller.Command;
 import org.application.controller.Validator;
 import org.application.model.service.ChangeUserStatusService;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public class ChangeUserStatusCommand extends Command {
     private ChangeUserStatusService changeUserStatusService;
+    private static final Logger logger = Logger.getLogger(ChangeUserStatusCommand.class);
 
     public ChangeUserStatusCommand() {
         changeUserStatusService = new ChangeUserStatusService();
@@ -28,12 +30,17 @@ public class ChangeUserStatusCommand extends Command {
                     wasChanged = changeUserStatusService.changeUserStatus(userLogin, true);
             }
             if (wasChanged) {
+                logger.info("admin " + action + "ed user '" + userLogin + "', sess_id=" + request.getRequestedSessionId());
                 request.setAttribute("changeStatusResponse", "User status was updated");
             } else {
+                logger.error("admin tried to update user '" + userLogin + "' status, but it doesn't exist," +
+                        " sess_id=" + request.getRequestedSessionId());
                 request.setAttribute("changeStatusResponse", "User status wasn't changed(user doesn't exist)");
             }
 
         } else {
+            logger.error("admin tried to update user '" + userLogin + "' status, but login is invalid," +
+                    " sess_id=" + request.getRequestedSessionId());
             request.setAttribute("changeStatusResponse", "Invalid user name");
         }
         return "forward$/admin/edit-users/change-status";

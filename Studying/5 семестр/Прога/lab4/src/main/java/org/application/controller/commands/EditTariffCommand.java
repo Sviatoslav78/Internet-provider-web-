@@ -1,15 +1,15 @@
 package org.application.controller.commands;
 
+import org.apache.log4j.Logger;
 import org.application.controller.Command;
 import org.application.controller.Validator;
-import org.application.model.entity.ServiceType;
-import org.application.model.entity.Tariff;
 import org.application.model.service.TariffService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class EditTariffCommand extends Command {
     private TariffService tariffService;
+    private static final Logger logger = Logger.getLogger(EditTariffCommand.class);
 
     public EditTariffCommand() {
         tariffService = new TariffService();
@@ -18,25 +18,22 @@ public class EditTariffCommand extends Command {
     @Override
     public String execute(HttpServletRequest request) {
         String tariffName = request.getParameter("tariffName");
-        int newTariffPrice = 0;
+        int newTariffPrice;
 
-        try {
+
+        if (Validator.isValidSum(request.getParameter("tariffPrice")) && tariffName != null) {
             newTariffPrice = Integer.parseInt(request.getParameter("tariffPrice"));
-        } catch (NumberFormatException e) {
-            request.setAttribute("editTariffResponse", "Invalid price");
+            tariffService.changeTariffPrice(tariffName, newTariffPrice);
 
-            return "forward$/admin/edit-tariffs/edit-tariff";
-        }
-
-        if (Validator.isValidTariffName(tariffName) && newTariffPrice > 0) {
-            if (tariffService.changeTariffPrice(tariffName, newTariffPrice)) {
-                request.setAttribute("editTariffResponse", "Price of the tariff was successfully updated");
-            } else {
-                request.setAttribute("editTariffResponse", "Price wasn't updated(no such tariff found)");
-            }
+            logger.info("admin changed tariff '" + tariffName + "' price to '" + newTariffPrice + "', " +
+                    "sess_id=" + request.getRequestedSessionId());
+            request.setAttribute("editTariffResponse", "Price of the tariff was successfully updated");
         } else {
-            request.setAttribute("editTariffResponse", "Invalid tariff name or price is negative");
+            logger.error("admin tried to change tariff '" + tariffName + "', price '" + request.getParameter("tariffPrice")
+                    + "' is invalid or no tariffs available, sess_id=" + request.getRequestedSessionId());
+            request.setAttribute("editTariffResponse", "Invalid price or no tariffs available");
         }
+        request.setAttribute("currentTariffs", tariffService.getTariffsAsc());
         return "forward$/admin/edit-tariffs/edit-tariff";
     }
 }

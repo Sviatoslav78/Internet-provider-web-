@@ -24,8 +24,8 @@
 </head>
 <body>
 
-<c:url value = "/" var = "myURL">
-    <c:param name = "command" value = "showTariffs"/>
+<c:url value="/" var="myURL">
+    <c:param name="command" value="showTariffs"/>
 </c:url>
 <h2><a href="<c:url value='${myURL}' />">Show tariffs</a></h2>
 
@@ -39,7 +39,7 @@
     </thead>
 
     <tbody>
-    <c:forEach var="tariff" items="${availableTariffs}" >
+    <c:forEach var="tariff" items="${availableTariffs}">
         <tr>
             <td>${tariff.getServiceType()}</td>
             <td>${tariff.getName()}</td>

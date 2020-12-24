@@ -18,7 +18,7 @@ public abstract class JdbcDao<T, K> implements AbstractDao<T, K> {
         }
     }
 
-    protected void execSQL (String sql){
+    protected void execSQL(String sql) {
         try {
             statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -27,13 +27,13 @@ public abstract class JdbcDao<T, K> implements AbstractDao<T, K> {
     }
 
     protected long getMaxFieldValue(String table, String field) throws SQLException {
-        String sql = "select max(${field}) from "  + table;
+        String sql = "select max(${field}) from " + table;
         sql = sql.replace("${field}", field);
 
         try (ResultSet rs = statement.executeQuery(sql)) {
             boolean hasFirst = rs.first();
             if (hasFirst) {
-                String fieldName = "max(" + field + ")" ;
+                String fieldName = "max(" + field + ")";
                 long maxId = rs.getLong(fieldName);
                 return maxId;
             } else {

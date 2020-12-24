@@ -4,8 +4,6 @@ import org.application.model.db.SubscriberDao;
 import org.application.model.db.connection.ConnectionImpl;
 import org.application.model.entity.Subscriber;
 
-import java.sql.SQLException;
-
 public class DepositService {
     private SubscriberDao subscriberDao;
 

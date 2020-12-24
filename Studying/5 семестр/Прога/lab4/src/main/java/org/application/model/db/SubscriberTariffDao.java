@@ -43,10 +43,11 @@ public class SubscriberTariffDao extends JdbcDao<SubscriberTariff, Long> {
     @Override
     public List<SubscriberTariff> getAll() {
         List<SubscriberTariff> list = new ArrayList<>();
-        String sql = "select subscriber_login, tariff_name from subscriber_tariff";
+        String sql = "select id, subscriber_login, tariff_name from subscriber_tariff";
         try (ResultSet rs = statement.executeQuery(sql)) {
             while (rs.next()) {
                 list.add(new SubscriberTariff(
+                        rs.getLong("id"),
                         rs.getString("subscriber_login"),
                         rs.getString("tariff_name")
                 ));
@@ -59,6 +60,7 @@ public class SubscriberTariffDao extends JdbcDao<SubscriberTariff, Long> {
 
     @Override
     public void deleteById(Long id) {
+        execSQL("delete from subscriber_tariff where id = " + id);
     }
 
     @Override

@@ -1,5 +1,8 @@
 package org.application.controller.filters;
 
+import org.apache.log4j.Logger;
+import org.application.controller.commands.DeleteTariffCommand;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,8 +10,10 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class AdminFilter implements Filter {
+    private static final Logger logger = Logger.getLogger(AdminFilter.class);
+
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 
@@ -20,14 +25,11 @@ public class AdminFilter implements Filter {
         HttpSession session = req.getSession();
         String currentUser = (String) session.getAttribute("currentUser");
 
-        if (currentUser == null) {
-            res.sendRedirect("/login");
+        if (currentUser != null && session.getAttribute("currentUser").equals("admin")) {
+            filterChain.doFilter(servletRequest, servletResponse);
         } else {
-            if (session.getAttribute("currentUser").equals("admin")) {
-                filterChain.doFilter(servletRequest, servletResponse);
-            } else {
-                res.sendRedirect("/login");
-            }
+            logger.warn("Access denied to admin page for client with session id =" + req.getRequestedSessionId());
+            res.sendRedirect("/login");
         }
     }
 

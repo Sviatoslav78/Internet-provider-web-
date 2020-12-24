@@ -18,14 +18,14 @@
         <p>Subscriber's login: <input name="subscriberLogin" type="text"/></p>
 
         <p>Status: <select name="status">
-            <option value = "unblock">Unblock</option>
-            <option value = "block">Block</option>
+            <option value="unblock">Unblock</option>
+            <option value="block">Block</option>
         </select></p>
-        <p><input type="submit" value="Update" /></p>
+        <p><input type="submit" value="Update"/></p>
 
         <input type="button" value="Back" onClick='location.href="/admin/edit-users"'>
 
-        <p> <c:out value="${changeStatusResponse}" /> </p>
+        <p><c:out value="${changeStatusResponse}"/></p>
     </form>
 </h3>
 </body>

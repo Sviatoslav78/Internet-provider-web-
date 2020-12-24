@@ -16,7 +16,7 @@
 <h3>
     <ol>
         <li><a href="<c:url value='/show-tariffs' />">Show available tariffs</a></li>
-        <li><a href="<c:url value='/user/choose-tariff' />">Choose tariff</a></li>
+        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/user/choose-tariff' />">Choose tariff</a></li>
         <li><a href="<c:url value='/user/top-up' />">Top up an account</a></li>
         <li><a href="<c:url value='/?command=profileInfo' />">Show profile info</a></li>
     </ol>

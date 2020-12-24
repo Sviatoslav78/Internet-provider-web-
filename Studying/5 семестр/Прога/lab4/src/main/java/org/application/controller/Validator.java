@@ -17,4 +17,8 @@ public class Validator {
     public static boolean isValidSubscriberName(String name) {
         return name.matches("[A-Za-z-]+");
     }
+
+    public static boolean isValidSum(String price) {
+        return !price.equals("") && Integer.parseInt(price) > 0;
+    }
 }

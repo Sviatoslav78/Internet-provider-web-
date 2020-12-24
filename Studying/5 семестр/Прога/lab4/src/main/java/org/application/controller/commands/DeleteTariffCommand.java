@@ -1,13 +1,14 @@
 package org.application.controller.commands;
 
+import org.apache.log4j.Logger;
 import org.application.controller.Command;
-import org.application.controller.Validator;
 import org.application.model.service.TariffService;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class DeleteTariffCommand extends Command {
     private TariffService tariffService;
+    private static final Logger logger = Logger.getLogger(DeleteTariffCommand.class);
 
     public DeleteTariffCommand() {
         tariffService = new TariffService();
@@ -16,20 +17,19 @@ public class DeleteTariffCommand extends Command {
     @Override
     public String execute(HttpServletRequest request) {
         String tariffName = request.getParameter("tariffName");
+        System.out.println(tariffName);
+        if (tariffName != null) {
+            tariffService.deleteTariff(tariffName);
+            logger.info("admin deleted tariff '" + tariffName + "', sess_id=" + request.getRequestedSessionId());
+            request.setAttribute("deleteTariffResponse", "Tariff was successfully deleted");
 
-        if (Validator.isValidTariffName(tariffName)) {
-            if (tariffService.deleteTariff(tariffName)) {
-                request.setAttribute("deleteTariffResponse", "Tariff was successfully deleted");
-            } else {
-                request.setAttribute("deleteTariffResponse", "Tariff wasn't deleted(it doesn't exist)");
-            }
-            return "forward$/admin/edit-tariffs/delete-tariff";
-
+            request.setAttribute("currentTariffs", tariffService.getTariffsAsc());
         } else {
-            request.setAttribute("deleteTariffResponse", "Invalid tariff name");
-            return "forward$/admin/edit-tariffs/delete-tariff";
+            logger.error("admin tried to delete tariff, but there are no tariffs, " +
+                    "sess_id=" + request.getRequestedSessionId());
+            request.setAttribute("deleteTariffResponse", "There are no tariffs at all");
         }
 
-
+        return "forward$/admin/edit-tariffs/delete-tariff";
     }
 }

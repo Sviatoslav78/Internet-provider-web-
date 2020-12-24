@@ -9,6 +9,7 @@ public class Subscriber {
     private String password;
 
     public static Subscriber EMPTY;
+
     static {
         EMPTY = new Subscriber("EMPTY", false, -1.0, "EMPTY", "EMPTY");
     }
@@ -32,12 +33,13 @@ public class Subscriber {
         this.password = password;
     }
 
-    public Subscriber(boolean active, String login) {
-        this.active = active;
+    public Subscriber(Double balance, String login) {
+        this.balance = balance;
         this.login = login;
     }
 
-    public Subscriber(Double balance, String login) {
+    public Subscriber(boolean active, Double balance, String login) {
+        this.active = active;
         this.balance = balance;
         this.login = login;
     }
