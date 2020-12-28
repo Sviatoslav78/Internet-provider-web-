@@ -6,6 +6,7 @@ import org.application.model.entity.Subscriber;
 import org.application.model.service.SubscriberProfileService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +20,18 @@ public class ShowUsersCommand extends Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        List<Subscriber> usersList = new ArrayList<>();
+        NumberFormat currencyFormat = (NumberFormat) request.getSession().getAttribute("currencyFormat");
 
-        usersList = subscriberProfileService.getAllUsersAsc();
+        if (request.getSession().getAttribute("currentUser") == null ||
+                !request.getSession().getAttribute("currentUser").equals("admin")) {
+            return "/?command=changeLanguage";
+        }
+        List<Subscriber> usersList = subscriberProfileService.getAllUsersAsc();
+        for (Subscriber subscriber : usersList) {
+            subscriber.setFormattedBalance(currencyFormat.format(subscriber.getBalance()));
+        }
+
+
         request.setAttribute("availableUsers", usersList);
         logger.info("registered users for admin were loaded successfully, sess_id=" + request.getRequestedSessionId());
 

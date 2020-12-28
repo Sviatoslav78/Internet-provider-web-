@@ -15,13 +15,13 @@
 <body>
 <h3>
     <ol>
-        <li><a href="<c:url value='/admin/edit-tariffs' />">Edit tariffs</a></li>
-        <li><a href="<c:url value='/admin/edit-users' />">Edit subscribers</a></li>
+        <li><a href="<c:url value='/admin/edit-tariffs' />">${editTariffsMenuItem}</a></li>
+        <li><a href="<c:url value='/admin/edit-users' />">${editSubscribersMenuItem}</a></li>
     </ol>
 </h3>
 
 <form action="/?command=exit" method="post">
-    <input type="submit" value="Exit"/>
+    <input type="submit" value="${exitLabel}"/>
 </form>
 
 </body>

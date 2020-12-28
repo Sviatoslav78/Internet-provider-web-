@@ -4,6 +4,7 @@ public class Tariff {
     private ServiceType serviceType;
     private String name;
     private double price;
+    private String formattedPrice;
 
     public static Tariff EMPTY;
 
@@ -42,6 +43,14 @@ public class Tariff {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getFormattedPrice() {
+        return formattedPrice;
+    }
+
+    public void setFormattedPrice(String formattedPrice) {
+        this.formattedPrice = formattedPrice;
     }
 
     @Override

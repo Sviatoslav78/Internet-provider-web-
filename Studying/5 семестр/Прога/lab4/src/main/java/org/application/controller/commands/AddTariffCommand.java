@@ -28,16 +28,16 @@ public class AddTariffCommand extends Command {
 
             if (tariffService.addTariff(new Tariff(ServiceType.values()[serviceType], tariffName, tariffPrice))) {
                 logger.info("admin added tariff '" + tariffName + "', sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("addTariffResponse", "Tariff was added successfully");
+                request.setAttribute("addTariffResponse", request.getSession().getAttribute("addTariffSuccess"));
             } else {
                 logger.warn("admin tried to add tariff '" + tariffName + "', it already exists, " +
                         "sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("addTariffResponse", "Tariff already exists");
+                request.setAttribute("addTariffResponse", request.getSession().getAttribute("addTariffExists"));
             }
         } else {
             logger.error("admin tried to add tariff '" + tariffName + "' with price '" + request.getParameter("tariffPrice")
                     + "', invalid tariff name or price, " + "sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("addTariffResponse", "Invalid tariff name or price");
+            request.setAttribute("addTariffResponse", request.getSession().getAttribute("addTariffInvalid"));
         }
         return "forward$/admin/edit-tariffs/add-tariff";
     }

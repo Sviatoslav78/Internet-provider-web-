@@ -15,17 +15,17 @@
 <body>
 <h3>
     <form action="/?command=addTariff" method="post">
-        <p>Service type: <select name="serviceType">
+        <p>${serviceTypeLabel}: <select name="serviceType">
             <option value="0">Phone</option>
             <option value="1">Internet</option>
             <option value="2">TV</option>
         </select></p>
 
-        <p>Tariff name: <input name="tariffName" type="text"/></p>
-        <p>Tariff price: <input name="tariffPrice" type="number"/></p>
-        <p><input type="submit" value="Add tariff"/></p>
+        <p>${tariffNameLabel}: <input name="tariffName" type="text"/></p>
+        <p>${tariffPriceLabel}: <input name="tariffPrice" type="number"/></p>
+        <p><input type="submit" value="${addTariffButton}"/></p>
 
-        <input type="button" value="Back" onClick='location.href="/admin/edit-tariffs"'>
+        <input type="button" value="${backLabel}" onClick='location.href="/admin/edit-tariffs"'>
 
         <p><c:out value="${addTariffResponse}"/></p>
     </form>

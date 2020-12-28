@@ -27,14 +27,14 @@
 <c:url value="/" var="myURL">
     <c:param name="command" value="showTariffs"/>
 </c:url>
-<h2><a href="<c:url value='${myURL}' />">Show tariffs</a></h2>
+<h2><a href="<c:url value='${myURL}' />">${showTariffsMenuItem}</a></h2>
 
 <table id="myTable" class="display">
     <thead>
     <tr>
-        <th>Service Type</th>
-        <th>Name</th>
-        <th>Price</th>
+        <th>${serviceTypeLabel}</th>
+        <th>${tariffNameLabel}</th>
+        <th>${tariffPriceLabel}</th>
     </tr>
     </thead>
 
@@ -43,13 +43,13 @@
         <tr>
             <td>${tariff.getServiceType()}</td>
             <td>${tariff.getName()}</td>
-            <td>${tariff.getPrice()}</td>
+            <td>${tariff.getFormattedPrice()}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
-<input type="button" value="Back" onClick='location.href="/${currentUser}/edit-tariffs"'>
+<input type="button" value="${backLabel}" onClick='location.href="/${currentUser}/edit-tariffs"'>
 
 </body>
 </html>

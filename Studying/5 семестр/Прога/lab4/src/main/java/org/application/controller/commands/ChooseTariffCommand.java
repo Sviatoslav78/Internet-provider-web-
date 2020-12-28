@@ -26,7 +26,7 @@ public class ChooseTariffCommand extends Command {
         if (tariffName == null) {
             logger.error("User '" + userLogin + "' tried to choose tariff, but there are no available tariffs, " +
                     "sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("chooseTariffResponse", "Sorry, there are no available tariffs");
+            request.setAttribute("chooseTariffResponse", request.getSession().getAttribute("chooseTariffNoTariffs"));
             return "forward$/user/choose-tariff";
         }
 
@@ -34,24 +34,22 @@ public class ChooseTariffCommand extends Command {
             case "inactive":
                 logger.error("User '" + userLogin + "' tried to choose tariff, but he is blocked, " +
                         "sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("chooseTariffResponse", "Sorry, your account is blocked(not enough money)");
+                request.setAttribute("chooseTariffResponse", request.getSession().getAttribute("chooseTariffBlocked"));
                 break;
             case "sameTariff":
                 logger.warn("User '" + userLogin + "' tried to choose tariff " + tariffName + "' but it's already chosen, " +
                         "sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("chooseTariffResponse", "Tariff " + tariffName +
-                        " is already chosen");
+                request.setAttribute("chooseTariffResponse", request.getSession().getAttribute("chooseTariffIsChosen"));
                 break;
             case "ok":
                 logger.info("User '" + userLogin + "' chose tariff " + tariffName + "' successfully, " +
                         "sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("chooseTariffResponse", "Tariff " + tariffName + " was successfully chosen");
+                request.setAttribute("chooseTariffResponse", request.getSession().getAttribute("chooseTariffSuccess"));
                 break;
             case "noMoney":
                 logger.warn("User '" + userLogin + "' chose tariff " + tariffName + "' and is blocked now, " +
                         "sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("chooseTariffResponse", "Tariff " + tariffName +
-                        " was chosen, but your account is blocked now due to lack of funds");
+                request.setAttribute("chooseTariffResponse", request.getSession().getAttribute("chooseTariffNoMoney"));
                 break;
         }
         return "forward$/user/choose-tariff";

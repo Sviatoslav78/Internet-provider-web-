@@ -16,17 +16,17 @@
 <h3>
     <form action="/?command=deleteTariff" method="post">
 
-        <p>Tariffs to delete:
+        <p>${tariffNameLabel}:
             <select name="tariffName">
                 <c:forEach var="tariff" items="${currentTariffs}">
                     <option value="${tariff.getName()}">${tariff.getName()}(${tariff.getServiceType()}),
-                        price:${tariff.getPrice()}</option>
+                        price:${tariff.getFormattedPrice()}</option>
                 </c:forEach>
             </select>
         </p>
-        <p><input type="submit" value="Delete tariff"/></p>
+        <p><input type="submit" value="${deleteTariffButton}"/></p>
 
-        <input type="button" value="Back" onClick='location.href="/admin/edit-tariffs"'>
+        <input type="button" value="${backLabel}" onClick='location.href="/admin/edit-tariffs"'>
 
         <p><c:out value="${deleteTariffResponse}"/></p>
     </form>

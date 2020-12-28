@@ -12,7 +12,9 @@ public class ExitCommand extends Command {
     public String execute(HttpServletRequest request) {
         logger.info("client '" + request.getSession().getAttribute("currentUser") + "' logged out successfully, " +
                 "sess_id=" + request.getRequestedSessionId());
+        String language = (String) request.getSession().getAttribute("lang");
         request.getSession().invalidate();
-        return "/login";
+        request.getSession().setAttribute("lang", language);
+        return "/?command=changeLanguage";
     }
 }

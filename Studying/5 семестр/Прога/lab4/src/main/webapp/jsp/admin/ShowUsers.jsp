@@ -27,15 +27,15 @@
 <c:url value="/" var="myURL">
     <c:param name="command" value="showUsers"/>
 </c:url>
-<h2><a href="<c:url value='${myURL}' />">Show subscribers</a></h2>
+<h2><a href="<c:url value='${myURL}' />">${showUsersMenuItem}</a></h2>
 
 <table id="myTable" class="display">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Active</th>
-        <th>Balance</th>
-        <th>Login</th>
+        <th>${subscriberNameLabel}</th>
+        <th>${activeStatusLabel}</th>
+        <th>${balanceLabel}</th>
+        <th>${subscriberLoginLabel}</th>
     </tr>
     </thead>
 
@@ -44,14 +44,14 @@
         <tr>
             <td>${user.getName()}</td>
             <td>${user.isActive()}</td>
-            <td>${user.getBalance()}</td>
+            <td>${user.getFormattedBalance()}</td>
             <td>${user.getLogin()}</td>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 
-<input type="button" value="Back" onClick='location.href="/admin/edit-users"'>
+<input type="button" value="${backLabel}" onClick='location.href="/admin/edit-users"'>
 
 </body>
 </html>

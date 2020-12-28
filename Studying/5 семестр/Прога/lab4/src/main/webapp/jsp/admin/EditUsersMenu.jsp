@@ -15,13 +15,13 @@
 <body>
 <h3>
     <ol>
-        <li><a href="<c:url value='/admin/edit-users/register-user' />">Register user</a></li>
-        <li><a href="<c:url value='/admin/edit-users/change-status' />">Change user's status</a></li>
-        <li><a href="<c:url value='/admin/edit-users/show-users' />">Show all users</a></li>
+        <li><a href="<c:url value='/admin/edit-users/register-user' />">${registerMenuItem}</a></li>
+        <li><a href="<c:url value='/admin/edit-users/change-status' />">${changeStatusMenuItem}</a></li>
+        <li><a href="<c:url value='/admin/edit-users/show-users' />">${showUsersMenuItem}</a></li>
     </ol>
 </h3>
 <form>
-    <input type="button" value="Back" onClick='location.href="/admin/main-menu"'>
+    <input type="button" value="${backLabel}" onClick='location.href="/admin/main-menu"'>
 </form>
 </body>
 </html>

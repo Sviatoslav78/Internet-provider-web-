@@ -27,11 +27,11 @@ public class EditTariffCommand extends Command {
 
             logger.info("admin changed tariff '" + tariffName + "' price to '" + newTariffPrice + "', " +
                     "sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("editTariffResponse", "Price of the tariff was successfully updated");
+            request.setAttribute("editTariffResponse", request.getSession().getAttribute("editTariffSuccess"));
         } else {
             logger.error("admin tried to change tariff '" + tariffName + "', price '" + request.getParameter("tariffPrice")
                     + "' is invalid or no tariffs available, sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("editTariffResponse", "Invalid price or no tariffs available");
+            request.setAttribute("editTariffResponse", request.getSession().getAttribute("editTariffInvalid"));
         }
         request.setAttribute("currentTariffs", tariffService.getTariffsAsc());
         return "forward$/admin/edit-tariffs/edit-tariff";

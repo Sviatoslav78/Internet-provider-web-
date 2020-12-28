@@ -10,22 +10,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>ChooseTariff</title>
+    <title>Choose Tariff</title>
 </head>
 <body>
 <h3>
     <form action="/?command=chooseTariff" method="post">
 
-        <p>Tariffs to choose:
+        <p>${tariffNameLabel}:
             <select name="tariffName">
                 <c:forEach var="tariff" items="${currentTariffs}">
                     <option value="${tariff.getName()}">${tariff.getName()}(${tariff.getServiceType()}),
-                        price:${tariff.getPrice()}</option>
+                        price:${tariff.getFormattedPrice()}</option>
                 </c:forEach>
             </select>
         </p>
-        <p><input type="submit" value="Choose tariff"/></p>
-        <input type="button" value="Back" onClick='location.href="/user/main-menu"'>
+        <p><input type="submit" value="${chooseTariffMenuItem}"/></p>
+        <input type="button" value="${backLabel}" onClick='location.href="/user/main-menu"'>
 
         <p><c:out value="${chooseTariffResponse}"/></p>
     </form>

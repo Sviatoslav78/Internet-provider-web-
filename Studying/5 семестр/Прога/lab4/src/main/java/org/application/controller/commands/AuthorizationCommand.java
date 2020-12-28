@@ -22,19 +22,12 @@ public class AuthorizationCommand extends Command {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
 
-        if (!Validator.isValidLogin(login)) {
-            logger.error("User tried to log in, login '" + login + "' is invalid, " +
+        if (!Validator.isValidLogin(login) || !Validator.isValidPassword(password)) {
+            logger.error("User tried to log in, login '" + login + "' or password '" + password + "' is invalid, " +
                     "sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("authError", "Invalid login");
+            request.setAttribute("authError", request.getSession().getAttribute("invalidAuthLabel"));
             return "forward$/login";
-        } else if (!Validator.isValidPassword(password)) {
-            logger.error("User tried to log in, password '" + password + "' is invalid, " +
-                    "sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("authError", "Invalid password");
-            return "forward$/login";
-        }
-
-        if (login.equals("admin123") && password.equals("admin123")) {
+        } else if (login.equals("admin123") && password.equals("admin123")) {
             logger.info("admin logged in successfully, sess_id=" + request.getRequestedSessionId());
             request.getSession().setAttribute("currentUser", "admin");
             return "/admin/main-menu";
@@ -43,7 +36,7 @@ public class AuthorizationCommand extends Command {
         Subscriber subscriber = authorizationService.isValidAuth(login, password);
         if (subscriber.getLogin().equals("EMPTY")) {
             logger.error("User tried to log in, invalid login/password, sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("authError", "Invalid login/password");
+            request.setAttribute("authError", request.getSession().getAttribute("invalidAuthLabel"));
             return "forward$/login";
         } else {
             logger.info("User '" + login + "' logged in successfully, sess_id=" + request.getRequestedSessionId());

@@ -6,6 +6,7 @@ import org.application.model.entity.Tariff;
 import org.application.model.service.TariffService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,13 @@ public class ShowTariffsCommand extends Command {
 
     @Override
     public String execute(HttpServletRequest request) {
-        List<Tariff> tariffList = new ArrayList<>();
-        tariffList = tariffService.getTariffsAsc();
+        NumberFormat currencyFormat = (NumberFormat) request.getSession().getAttribute("currencyFormat");
+
+        List<Tariff> tariffList = tariffService.getTariffsAsc();
+        for (Tariff tariff : tariffList) {
+            tariff.setFormattedPrice(currencyFormat.format(tariff.getPrice()));
+        }
+
 
         logger.info("available tariffs for client( " + request.getSession().getAttribute("currentUser") +
                 ") were loaded successfully, sess_id=" + request.getRequestedSessionId());

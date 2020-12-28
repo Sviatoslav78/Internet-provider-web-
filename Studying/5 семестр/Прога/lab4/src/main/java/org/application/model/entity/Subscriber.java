@@ -7,6 +7,7 @@ public class Subscriber {
     private Double balance;
     private String login;
     private String password;
+    private String formattedBalance;
 
     public static Subscriber EMPTY;
 
@@ -82,6 +83,14 @@ public class Subscriber {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getFormattedBalance() {
+        return formattedBalance;
+    }
+
+    public void setFormattedBalance(String formattedBalance) {
+        this.formattedBalance = formattedBalance;
     }
 
     @Override

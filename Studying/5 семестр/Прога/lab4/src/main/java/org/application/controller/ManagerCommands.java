@@ -22,6 +22,7 @@ public class ManagerCommands {
         commands.put("showUsers", new ShowUsersCommand());
         commands.put("exit", new ExitCommand());
         commands.put("loadTariffs", new LoadTariffsCommand());
+        commands.put("changeLanguage", new ChangeLanguageCommand());
     }
 
     public Command getCommand(String key) {

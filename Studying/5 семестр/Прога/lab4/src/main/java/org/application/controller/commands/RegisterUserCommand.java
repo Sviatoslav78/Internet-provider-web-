@@ -24,12 +24,12 @@ public class RegisterUserCommand extends Command {
             logger.info("admin registered new user with name '" + newSubscriberName + "', " +
                     "sess_id=" + request.getRequestedSessionId());
             Subscriber newSubscriber = registerService.registerUser(newSubscriberName);
-            request.setAttribute("registerUserResponse", "User was successfully registered, login details:");
+            request.setAttribute("registerUserResponse", request.getSession().getAttribute("registerUserSuccess"));
             request.setAttribute("newSubscriber", newSubscriber);
         } else {
             logger.error("admin tried to register new user, but its name '" + newSubscriberName + "' is invalid, " +
                     "sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("registerUserResponse", "Invalid subscriber name");
+            request.setAttribute("registerUserResponse", request.getSession().getAttribute("registerUserInvalid"));
         }
 
         return "forward$/admin/edit-users/register-user";

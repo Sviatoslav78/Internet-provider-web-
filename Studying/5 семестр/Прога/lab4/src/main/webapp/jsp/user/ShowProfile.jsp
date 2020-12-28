@@ -14,22 +14,22 @@
 </head>
 <body>
 <h3>
-    <p><c:out value="Name: ${currentUserInfo.getName()}"/></p>
-    <p><c:out value="Active: ${currentUserInfo.isActive()}"/></p>
-    <p><c:out value="Balance: ${currentUserInfo.getBalance()}"/></p>
-    <p><c:out value="Login: ${currentUserInfo.getLogin()}"/></p>
+    <p><c:out value="${subscriberNameLabel}: ${currentUserInfo.getName()}"/></p>
+    <p><c:out value="${activeStatusLabel}: ${currentUserInfo.isActive()}"/></p>
+    <p><c:out value="${balanceLabel}: ${currentUserInfo.getFormattedBalance()}"/></p>
+    <p><c:out value="${subscriberLoginLabel}: ${currentUserInfo.getLogin()}"/></p>
     <p></p>
-    <p>User tariffs:</p>
+    <p>${userTariffsLabel}:</p>
 
     <ul>
         <c:forEach var="tariff" items="${currentUserTariffs}">
             <li>
-                    ${tariff.getName()}(${tariff.getServiceType()}), price:${tariff.getPrice()}
+                    ${tariff.getName()}(${tariff.getServiceType()}), ${tariffPriceLabel}: ${tariff.getFormattedPrice()}
             </li>
         </c:forEach>
     </ul>
 
-    <input type="button" value="Back" onClick='location.href="/user/main-menu"'>
+    <input type="button" value="${backLabel}" onClick='location.href="/user/main-menu"'>
 </h3>
 </body>
 </html>

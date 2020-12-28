@@ -16,10 +16,10 @@
 <h3>
     <form action="/?command=register" method="post">
 
-        <p>Subscriber's name: <input name="subscriberName" type="text"/></p>
-        <p><input type="submit" value="Register user"/></p>
+        <p>${subscriberNameLabel}: <input name="subscriberName" type="text"/></p>
+        <p><input type="submit" value="${registerUserButton}"/></p>
 
-        <input type="button" value="Back" onClick='location.href="/admin/edit-users"'>
+        <input type="button" value="${backLabel}" onClick='location.href="/admin/edit-users"'>
 
         <p><c:out value="${registerUserResponse}"/></p>
     </form>

@@ -18,6 +18,8 @@ public class ChangeUserStatusCommand extends Command {
     @Override
     public String execute(HttpServletRequest request) {
         String action = request.getParameter("status");
+        action.replace("Розблокований", "unblock");
+        action.replace("Заблокований", "block");
         String userLogin = request.getParameter("subscriberLogin");
         boolean wasChanged = false;
 
@@ -31,19 +33,17 @@ public class ChangeUserStatusCommand extends Command {
             }
             if (wasChanged) {
                 logger.info("admin " + action + "ed user '" + userLogin + "', sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("changeStatusResponse", "User status was updated");
+                request.setAttribute("changeStatusResponse", request.getSession().getAttribute("updateStatusSuccess"));
             } else {
                 logger.error("admin tried to update user '" + userLogin + "' status, but it doesn't exist," +
                         " sess_id=" + request.getRequestedSessionId());
-                request.setAttribute("changeStatusResponse", "User status wasn't changed(user doesn't exist)");
+                request.setAttribute("changeStatusResponse", request.getSession().getAttribute("updateStatusNotExist"));
             }
-
         } else {
             logger.error("admin tried to update user '" + userLogin + "' status, but login is invalid," +
                     " sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("changeStatusResponse", "Invalid user name");
+            request.setAttribute("changeStatusResponse", request.getSession().getAttribute("updateStatusInvalid"));
         }
         return "forward$/admin/edit-users/change-status";
-
     }
 }

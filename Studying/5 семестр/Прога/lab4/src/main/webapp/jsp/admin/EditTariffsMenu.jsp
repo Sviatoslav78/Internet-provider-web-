@@ -15,14 +15,14 @@
 <body>
 <h3>
     <ol>
-        <li><a href="<c:url value='/admin/edit-tariffs/add-tariff' />">Add tariff</a></li>
-        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/admin/edit-tariffs/delete-tariff' />">Delete tariff</a></li>
-        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/admin/edit-tariffs/edit-tariff' />">Edit tariff</a></li>
-        <li><a href="<c:url value='/show-tariffs' />">Show all tariffs</a></li>
+        <li><a href="<c:url value='/admin/edit-tariffs/add-tariff' />">${addTariffMenuItem}</a></li>
+        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/admin/edit-tariffs/delete-tariff' />">${deleteTariffMenuItem}</a></li>
+        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/admin/edit-tariffs/edit-tariff' />">${editTariffMenuItem}</a></li>
+        <li><a href="<c:url value='/show-tariffs' />">${showTariffsMenuItem}</a></li>
     </ol>
 </h3>
 <form>
-    <input type="button" value="Back" onClick='location.href="/admin/main-menu"'>
+    <input type="button" value="${backLabel}" onClick='location.href="/admin/main-menu"'>
 </form>
 </body>
 </html>

@@ -17,17 +17,16 @@ public class DeleteTariffCommand extends Command {
     @Override
     public String execute(HttpServletRequest request) {
         String tariffName = request.getParameter("tariffName");
-        System.out.println(tariffName);
         if (tariffName != null) {
             tariffService.deleteTariff(tariffName);
             logger.info("admin deleted tariff '" + tariffName + "', sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("deleteTariffResponse", "Tariff was successfully deleted");
+            request.setAttribute("deleteTariffResponse", request.getSession().getAttribute("deleteTariffSuccess"));
 
             request.setAttribute("currentTariffs", tariffService.getTariffsAsc());
         } else {
             logger.error("admin tried to delete tariff, but there are no tariffs, " +
                     "sess_id=" + request.getRequestedSessionId());
-            request.setAttribute("deleteTariffResponse", "There are no tariffs at all");
+            request.setAttribute("deleteTariffResponse", request.getSession().getAttribute("deleteTariffNoTariffs"));
         }
 
         return "forward$/admin/edit-tariffs/delete-tariff";

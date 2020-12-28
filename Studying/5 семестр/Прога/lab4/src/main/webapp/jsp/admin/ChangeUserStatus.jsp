@@ -15,15 +15,15 @@
 <body>
 <h3>
     <form action="/?command=changeStatus" method="post">
-        <p>Subscriber's login: <input name="subscriberLogin" type="text"/></p>
+        <p>${subscriberLoginLabel}: <input name="subscriberLogin" type="text"/></p>
 
-        <p>Status: <select name="status">
-            <option value="unblock">Unblock</option>
-            <option value="block">Block</option>
+        <p>${subscriberStatusLabel}: <select name="status">
+            <option value="unblock">${unblockStatus}</option>
+            <option value="block">${blockStatus}</option>
         </select></p>
-        <p><input type="submit" value="Update"/></p>
+        <p><input type="submit" value="${updateStatusButton}"/></p>
 
-        <input type="button" value="Back" onClick='location.href="/admin/edit-users"'>
+        <input type="button" value="${backLabel}" onClick='location.href="/admin/edit-users"'>
 
         <p><c:out value="${changeStatusResponse}"/></p>
     </form>

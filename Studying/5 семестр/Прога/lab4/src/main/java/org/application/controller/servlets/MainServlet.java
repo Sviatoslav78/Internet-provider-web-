@@ -46,7 +46,7 @@ public class MainServlet extends HttpServlet {
         String currentUser = (String) request.getSession().getAttribute("currentUser");
 
         if (currentUser == null) {
-            request.getRequestDispatcher("/login").forward(request, response);
+            response.sendRedirect("/?command=changeLanguage");
         } else {
             if (currentUser.equals("admin")) {
                 response.sendRedirect("/admin/main-menu");

@@ -15,14 +15,14 @@
 <body>
 <h3>
     <ol>
-        <li><a href="<c:url value='/show-tariffs' />">Show available tariffs</a></li>
-        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/user/choose-tariff' />">Choose tariff</a></li>
-        <li><a href="<c:url value='/user/top-up' />">Top up an account</a></li>
-        <li><a href="<c:url value='/?command=profileInfo' />">Show profile info</a></li>
+        <li><a href="<c:url value='/show-tariffs' />">${showTariffsMenuItem}</a></li>
+        <li><a href="<c:url value='/?command=loadTariffs&urlToForward=/user/choose-tariff' />">${chooseTariffMenuItem}</a></li>
+        <li><a href="<c:url value='/user/top-up' />">${depositMenuItem}</a></li>
+        <li><a href="<c:url value='/?command=profileInfo' />">${showProfileMenuItem}</a></li>
     </ol>
 </h3>
 <form action="/?command=exit" method="post">
-    <input type="submit" value="Exit"/>
+    <input type="submit" value="${exitLabel}"/>
 </form>
 </body>
 </html>
